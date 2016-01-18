@@ -7,6 +7,10 @@ git clone git@github.com:rajkataria/node-starter.git
 ```
 npm install
 ```
+## Install gulp ##
+```
+npm install gulp
+```
 ## Run ##
 ```
 gulp
