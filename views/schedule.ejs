@@ -22,50 +22,39 @@
 
 <script type="text/javascript" charset="utf-8">
 	function init() {
-    // Initialize Scheduler view and load it's data
-    var schedulerTasks = [
-  			{ start_date: "2014-06-30 12:00", end_date: "2014-06-30 14:00", text:"Task D-12458" },
-  			{ start_date: "2014-06-30 12:30", end_date: "2014-06-30 15:00", text:"Task D-72348" },
-        { start_date: "2014-06-30 13:30", end_date: "2014-06-30 17:00", text:"Task D-41175" },
-        { start_date: "2014-06-30 16:30", end_date: "2014-06-30 20:00", text:"Task D-92431" },
-  		]
+		// Initialize Scheduler view and load it's data
+		var schedulerTasks = [
+				{ start_date: "2014-06-30 12:00", end_date: "2014-06-30 14:00", text:"Task D-12458" },
+				{ start_date: "2014-06-30 12:30", end_date: "2014-06-30 15:00", text:"Task D-72348" },
+				{ start_date: "2014-06-30 13:30", end_date: "2014-06-30 17:00", text:"Task D-41175" },
+				{ start_date: "2014-06-30 16:30", end_date: "2014-06-30 20:00", text:"Task D-92431" },
+			]
 		scheduler.config.multi_day = true;
 		scheduler.config.xml_date="%Y-%m-%d %H:%i";
-    scheduler.config.first_hour = 8;
+		scheduler.config.first_hour = 8;
 		scheduler.config.limit_time_select = true;
-    scheduler.config.cascade_event_display = true; // enable rendering, default value = false
-    scheduler.config.cascade_event_count = 4; // how many events events will be displayed in cascade style (max), default value = 4
-    scheduler.config.cascade_event_margin = 30; // margin between events, default value = 30
+		scheduler.config.cascade_event_display = true; // enable rendering, default value = false
+		scheduler.config.cascade_event_count = 4; // how many events events will be displayed in cascade style (max), default value = 4
+		scheduler.config.cascade_event_margin = 30; // margin between events, default value = 30
 
 		scheduler.init('scheduler',new Date(2014,5,30),"day");
 		scheduler.parse(schedulerTasks,"json");
 
-    // Initialize Gantt chart and load it's data
-    var ganttTasks = {
-        data:[
-            {id:1, text:"Project #2", start_date:"01-04-2013", duration:18,
-        progress:0.4, open: true},
-            {id:2, text:"Task #1",    start_date:"02-04-2013", duration:8,
-        progress:0.6, parent:1},
-            {id:3, text:"Task #2",    start_date:"11-04-2013", duration:8,
-        progress:0.6, parent:1}
-        ],
-        links:[
-            { id:1, source:1, target:2, type:"1"},
-            { id:2, source:2, target:3, type:"0"},
-            { id:3, source:3, target:4, type:"0"},
-            { id:4, source:2, target:5, type:"2"},
-      ]
-    };
-    gantt.init("gantt");
-    gantt.parse(ganttTasks);
 
-
+		$.ajax({
+				url: "/scheduler-data",
+				type: 'GET',
+				success: function(data) {
+					// Initialize Gantt chart and load it's data
+					gantt.init("gantt");
+					gantt.parse(data);
+				}
+			});
 	}
 </script>
 
 <body onload="init();">
-  <div id="gantt" style='width:100%; height:50%;'></div>
+	<div id="gantt" style='width:100%; height:50%;'></div>
 	<div id="scheduler" class="dhx_cal_container" style='width:100%; height:50%;'>
 		<div class="dhx_cal_navline">
 			<div class="dhx_cal_prev_button">&nbsp;</div>
