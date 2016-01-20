@@ -40,7 +40,6 @@
 		scheduler.init('scheduler',new Date(2014,5,30),"day");
 		scheduler.parse(schedulerTasks,"json");
 
-
 		$.ajax({
 				url: "/scheduler-data",
 				type: 'GET',
@@ -54,6 +53,7 @@
 </script>
 
 <body onload="init();">
+	<!-- Code copied and pasted from dhtmlx example -->
 	<div id="gantt" style='width:100%; height:50%;'></div>
 	<div id="scheduler" class="dhx_cal_container" style='width:100%; height:50%;'>
 		<div class="dhx_cal_navline">

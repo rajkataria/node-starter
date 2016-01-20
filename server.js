@@ -10,7 +10,8 @@ app.use('/resources',serveStatic(__dirname + '/scripts/third_party/potree/resour
 app.get('/', function (req, res) {
 	var person = 'Raj';
 	res.render('main.ejs', {
-		name: person
+		name: person,
+		age: 22
 	});
 });
 
