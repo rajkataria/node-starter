@@ -108,17 +108,17 @@
     var loader = new THREE.OBJLoader(manager);
 
     $.ajax({
-          url: "assets/rh.obj",
-          type: 'GET',
-          success: function(objData) {
-            var object = loader.parse(objData);
-            var light = new THREE.PointLight(0xEEEEEE);
-            var lightAmb = new THREE.AmbientLight(0x555555);
-            scene.add(light);
-            scene.add(lightAmb);
-            scene.add(object);
-          }
-        })
+      url: "assets/rh.obj",
+      type: 'GET',
+      success: function(objData) {
+        var object = loader.parse(objData);
+        var light = new THREE.PointLight(0xEEEEEE);
+        var lightAmb = new THREE.AmbientLight(0x555555);
+        scene.add(light);
+        scene.add(lightAmb);
+        scene.add(object);
+      }
+    })
 
   </script>
   <script src="/js3/potree/examples/js/viewer.js"></script>
