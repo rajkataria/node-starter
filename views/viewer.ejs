@@ -38,6 +38,10 @@
   <script src="/js3/potree/src/arena4d/PointCloudArena4D.js"></script>
   <script src="/js3/potree/src/arena4d/PointCloudArena4DGeometry.js"></script>
 
+  <script type="text/javascript" src="/js3/jQuery/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="/js3/three.js/examples/js/loaders/DDSLoader.js"></script>
+  <script type="text/javascript" src="/js3/three.js/examples/js/loaders/OBJLoader.js"></script>
+
   <!-- INCLUDE ADDITIONAL DEPENDENCIES HERE -->
   <!-- INCLUDE SETTINGS HERE -->
   <!--<script src="/js3/potree/libs/plasio/js/laslaz.js"></script>
@@ -94,6 +98,28 @@
       pointSize: 		1,
       useEDL:			false,				// eye-dome-lighting, especially usefull for point clouds without normals
     };
+
+    THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
+
+    var manager = new THREE.LoadingManager();
+      manager.onProgress = function ( item, loaded, total ) {
+      console.log( item, loaded, total );
+    };
+    var loader = new THREE.OBJLoader(manager);
+
+    $.ajax({
+          url: "assets/rh.obj",
+          type: 'GET',
+          success: function(objData) {
+            var object = loader.parse(objData);
+            var light = new THREE.PointLight(0xEEEEEE);
+            var lightAmb = new THREE.AmbientLight(0x555555);
+            scene.add(light);
+            scene.add(lightAmb);
+            scene.add(object);
+          }
+        })
+
   </script>
   <script src="/js3/potree/examples/js/viewer.js"></script>
   <!--  Adding a cube to the scene in GPS Waypoints file -->

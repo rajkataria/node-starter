@@ -7,6 +7,7 @@ app.set('view engine', 'ejs'); // set up ejs for templating
 app.use('/js',serveStatic(__dirname + '/scripts'));
 app.use('/js3',serveStatic(__dirname + '/scripts/third_party'));
 app.use('/resources',serveStatic(__dirname + '/scripts/third_party/potree/resources'));
+app.use('/assets',serveStatic(__dirname + '/assets'));
 
 app.get('/', function (req, res) {
   var person = 'Raj';
